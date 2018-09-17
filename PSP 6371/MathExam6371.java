@@ -4,36 +4,58 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 public class MathExam6371 {
-	static int n1, n2;  //Á½¸ö¼ÆËãÊı
-    static int yunsuanfu;
-    static int grade;
-    static String[] Q,A;  //Ğ´ÈëtxtÎÄ¼şµÄÌâÄ¿ºÍ´ğ°¸
-	public static void main(String[] args)throws IOException {
+    	static int n1, n2;  //ä¸¤ä¸ªè®¡ç®—æ•°
+    	static int yunsuanfu;
+    	static int grade;
+    	static String[] Q,A;  //å†™å…¥txtæ–‡ä»¶çš„é¢˜ç›®å’Œç­”æ¡ˆ
+    	public static void main(String[] args)throws IOException {
 		// TODO Auto-generated method stub
 		int n=Integer.parseInt(args[0]);
-		//ÅĞ¶Ï´«Èë²ÎÊıµÄÎÊÌâ
+		//åˆ¤æ–­ä¼ å…¥å‚æ•°çš„é—®é¢˜
 		try {
-       	 n= Integer.parseInt(args[0]);
-            if (n < 0) {
-                System.out.println("ÌâÊı²»¿ÉÎª¸º£¡ÇëÖØĞÂÔËĞĞ£¡");
+       	 	n= Integer.parseInt(args[0]);
+            	if (n < 0) {
+                System.out.println("é¢˜æ•°ä¸å¯ä¸ºè´Ÿï¼è¯·é‡æ–°è¿è¡Œï¼");
                 System.exit(0);
             } else if (n== 0 || n > 100) {
-                System.out.println("ÇëÊäÈëºÏÊÊµÄÌâÊı£¡Èç1-100");
+                System.out.println("è¯·è¾“å…¥åˆé€‚çš„é¢˜æ•°ï¼å¦‚1-100");
                 System.exit(0);
             }
         } catch (NumberFormatException e) {
-            System.out.println("ÇëÊäÈëÕûÊı£¡ÇëÖØĞÂÔËĞĞ£¡");
+            System.out.println("è¯·è¾“å…¥æ•´æ•°ï¼è¯·é‡æ–°è¿è¡Œï¼");
             System.exit(0);
+        }
+		try {
+			if(args.length==1) {
+			grade1(n);
+			}
+			else if(args.length==2) {
+				int m=Integer.parseInt(args[1]);
+				if(m==1) {
+					grade1(n);
+				}
+				else if(m==2) {
+					grade2(n);
+				}
+				else if(m<1||m>2) {
+					System.out.println("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¿è¡Œ");
+					System.exit(0);
+				}
+			}
+		}
+		catch (NumberFormatException e) {
+            	System.out.println("å¹´çº§é€‰æ‹©é€‰é¡¹éæ•´æ•°ï¼è¯·é‡æ–°è¿è¡Œï¼");
+            	System.exit(0);
         }
 
 		if(args.length<1||args.length>2) {
-			System.out.println("ÊäÈëÓĞÎó£¬ÇëÖØĞÂÔËĞĞ");
+			System.out.println("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¿è¡Œ");
 			System.exit(0);
 		}
 		writeTo();
 	}
 	
-	public static void grade1(int n) {//Ò»Äê¼¶ÌâÄ¿
+	public static void grade1(int n) {//ä¸€å¹´çº§é¢˜ç›®
         int result = 0;
         for (int i = 1; i <= n; i++) {
         	n1 = (int)(Math.random()*(10+1));
@@ -41,20 +63,20 @@ public class MathExam6371 {
             	if (yunsuanfu == 0) {
             		n2 = (int)(Math.random()*(10+1));
             		result = n1 + n2;
-            		// ¼ÇÂ¼ÌâÄ¿ºÍ´ğ°¸
+            		// è®°å½•é¢˜ç›®å’Œç­”æ¡ˆ
             		Q[i-1] = "(" + i + ") " + n1 + " + " + n2 + " =";
             		A[i-1] = "(" + i + ") " + n1 + " + " + n2 + " = " + result;
             	} 
             	else if (yunsuanfu ==1) {
             		do {n2 = (int)(Math.random()*(10+1));}
             		while (n2 > n1);
-            		result = n1 - n2;// ¼ÇÂ¼ÌâÄ¿ºÍ´ğ°¸
+            		result = n1 - n2;// è®°å½•é¢˜ç›®å’Œç­”æ¡ˆ
 					Q[i-1] = "(" + i + ") " + n1 + " - " + n2 + " =";
 					A[i-1] = "(" + i + ") " + n1 + " - " + n2 + " = " + result;
             }
         }
 	}
-	public static void grade2(int n) {//¶şÄê¼¶ÌâÄ¿
+	public static void grade2(int n) {//äºŒå¹´çº§é¢˜ç›®
         int result = 0;
         int yushu = 0;
         for (int i = 1; i <= n; i++) {
@@ -63,7 +85,7 @@ public class MathExam6371 {
             	n1 = (int)(Math.random()*10);
             	n2 = (int)(Math.random()*10);
             	result = n1 * n2;
-                // ¼ÇÂ¼ÌâÄ¿ºÍ´ğ°¸
+                // è®°å½•é¢˜ç›®å’Œç­”æ¡ˆ
             	Q[i-1] = "(" + i + ") " + n1 + " * " + n2 + " =";
             	A[i-1] = "(" + i + ") " + n1 + " * " + n2 + " = " + result;
             } else if (yunsuanfu == 1) {
@@ -73,7 +95,7 @@ public class MathExam6371 {
                 } while (n2 <= (n1 / 10) || n2 == 0);
                 result = n1 / n2;
                 yushu = n1 % n2;
-                // ¼ÇÂ¼ÌâÄ¿ºÍ´ğ°¸
+                // è®°å½•é¢˜ç›®å’Œç­”æ¡ˆ
                 Q[i-1] = "(" + i + ") " + n1 + " / " + n2 + " =";
                 if (yushu == 0) {
                 	A[i-1] = "(" + i + ") " + n1 + " / " + n2 + " = " + result;
@@ -83,7 +105,7 @@ public class MathExam6371 {
             }
         }
 	}
-    public static void writeTo() throws IOException {//Êä³ö
+    public static void writeTo() throws IOException {//è¾“å‡º
   	  File file= new File("out.txt");
 		if (!file.exists()) {
 			File parent = file.getParentFile();
